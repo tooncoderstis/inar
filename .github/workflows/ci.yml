@@ -20,6 +20,11 @@ jobs:
           r-version: "4.5.3"
           use-public-rspm: true
 
+      - name: System dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libuv1-dev
+
       - name: Install packages
         run: |
           Rscript -e 'install.packages(c("shiny","bslib","plotly","DT","readxl","jsonlite","digest","testthat","styler","lintr"), repos="https://packagemanager.posit.co/cran/latest")'
