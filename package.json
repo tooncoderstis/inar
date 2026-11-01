@@ -1,0 +1,17 @@
+{
+  "name": "inar-underreporting-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Rekonstruksi dan web lab untuk INAR(1)-hidden Markov chain under-reporting (Fernandez-Fontelo dkk., 2016).",
+  "scripts": {
+    "dev": "Rscript -e \"shiny::runApp('.', port=3838)\"",
+    "verify": "Rscript scripts/run_analysis.R",
+    "test": "Rscript tests/testthat.R",
+    "lint": "Rscript -e \"lintr::lint_dir()\"",
+    "format": "Rscript -e \"styler::style_dir('.', exclude_dirs = c('data', 'www', 'private', 'analysis'))\"",
+    "hub:report": "node scripts/hub-report.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

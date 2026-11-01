@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-11-01T15:09:41+0700",
+  "summary": {
+    "PASS": 17,
+    "PASS_TOLERANCE": 13,
+    "ESTIMATED": 5,
+    "N/A": 4,
+    "FAIL": 0
+  },
+  "key": {
+    "hpv_coverage_pct": 37.7952287536722,
+    "hpv_mean_observed": 1.26923076923077,
+    "hpv_mean_hidden": 3.3581772384628,
+    "bot_coverage_pct": 51.2456051843082,
+    "bot_mean_observed": 8.84090909090909,
+    "bot_mean_hidden": 17.2520337287699
+  }
+}

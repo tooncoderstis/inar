@@ -1,0 +1,303 @@
+{
+  "id": "mesothelioma",
+  "title": {
+    "id": "Mesothelioma di Britania Raya (1968-2013)",
+    "en": "Mesothelioma in Great Britain (1968-2013)"
+  },
+  "subtitle": {
+    "id": "Ekstensi data HSE - bukan reproduksi seri ONS paper",
+    "en": "HSE data extension - not a reproduction of the paper's ONS series"
+  },
+  "stats": {
+    "n": 46,
+    "mean": 1133.0652173913,
+    "var": 610067.262318841,
+    "median": 966,
+    "min": 153,
+    "max": 2560
+  },
+  "series": [
+    {
+      "year": 1968,
+      "observed": 153,
+      "population": 55211700,
+      "rate_per_100k": 0.2771
+    },
+    {
+      "year": 1969,
+      "observed": 159,
+      "population": 55441750,
+      "rate_per_100k": 0.2868
+    },
+    {
+      "year": 1970,
+      "observed": 194,
+      "population": 55663250,
+      "rate_per_100k": 0.3485
+    },
+    {
+      "year": 1971,
+      "observed": 181,
+      "population": 55896223,
+      "rate_per_100k": 0.3238
+    },
+    {
+      "year": 1972,
+      "observed": 212,
+      "population": 56086065,
+      "rate_per_100k": 0.378
+    },
+    {
+      "year": 1973,
+      "observed": 224,
+      "population": 56194527,
+      "rate_per_100k": 0.3986
+    },
+    {
+      "year": 1974,
+      "observed": 243,
+      "population": 56229974,
+      "rate_per_100k": 0.4322
+    },
+    {
+      "year": 1975,
+      "observed": 272,
+      "population": 56225800,
+      "rate_per_100k": 0.4838
+    },
+    {
+      "year": 1976,
+      "observed": 312,
+      "population": 56211968,
+      "rate_per_100k": 0.555
+    },
+    {
+      "year": 1977,
+      "observed": 332,
+      "population": 56193492,
+      "rate_per_100k": 0.5908
+    },
+    {
+      "year": 1978,
+      "observed": 392,
+      "population": 56196504,
+      "rate_per_100k": 0.6976
+    },
+    {
+      "year": 1979,
+      "observed": 434,
+      "population": 56246951,
+      "rate_per_100k": 0.7716
+    },
+    {
+      "year": 1980,
+      "observed": 457,
+      "population": 56314216,
+      "rate_per_100k": 0.8115
+    },
+    {
+      "year": 1981,
+      "observed": 468,
+      "population": 56333829,
+      "rate_per_100k": 0.8308
+    },
+    {
+      "year": 1982,
+      "observed": 507,
+      "population": 56313641,
+      "rate_per_100k": 0.9003
+    },
+    {
+      "year": 1983,
+      "observed": 571,
+      "population": 56332848,
+      "rate_per_100k": 1.0136
+    },
+    {
+      "year": 1984,
+      "observed": 623,
+      "population": 56422072,
+      "rate_per_100k": 1.1042
+    },
+    {
+      "year": 1985,
+      "observed": 618,
+      "population": 56550268,
+      "rate_per_100k": 1.0928
+    },
+    {
+      "year": 1986,
+      "observed": 706,
+      "population": 56681396,
+      "rate_per_100k": 1.2456
+    },
+    {
+      "year": 1987,
+      "observed": 814,
+      "population": 56802050,
+      "rate_per_100k": 1.433
+    },
+    {
+      "year": 1988,
+      "observed": 872,
+      "population": 56928327,
+      "rate_per_100k": 1.5318
+    },
+    {
+      "year": 1989,
+      "observed": 909,
+      "population": 57076711,
+      "rate_per_100k": 1.5926
+    },
+    {
+      "year": 1990,
+      "observed": 895,
+      "population": 57247586,
+      "rate_per_100k": 1.5634
+    },
+    {
+      "year": 1991,
+      "observed": 1023,
+      "population": 57424897,
+      "rate_per_100k": 1.7815
+    },
+    {
+      "year": 1992,
+      "observed": 1097,
+      "population": 57580402,
+      "rate_per_100k": 1.9052
+    },
+    {
+      "year": 1993,
+      "observed": 1152,
+      "population": 57718614,
+      "rate_per_100k": 1.9959
+    },
+    {
+      "year": 1994,
+      "observed": 1246,
+      "population": 57865745,
+      "rate_per_100k": 2.1533
+    },
+    {
+      "year": 1995,
+      "observed": 1317,
+      "population": 58019030,
+      "rate_per_100k": 2.2699
+    },
+    {
+      "year": 1996,
+      "observed": 1322,
+      "population": 58166950,
+      "rate_per_100k": 2.2728
+    },
+    {
+      "year": 1997,
+      "observed": 1367,
+      "population": 58316954,
+      "rate_per_100k": 2.3441
+    },
+    {
+      "year": 1998,
+      "observed": 1541,
+      "population": 58487141,
+      "rate_per_100k": 2.6348
+    },
+    {
+      "year": 1999,
+      "observed": 1615,
+      "population": 58682466,
+      "rate_per_100k": 2.7521
+    },
+    {
+      "year": 2000,
+      "observed": 1633,
+      "population": 58892514,
+      "rate_per_100k": 2.7728
+    },
+    {
+      "year": 2001,
+      "observed": 1860,
+      "population": 59119673,
+      "rate_per_100k": 3.1462
+    },
+    {
+      "year": 2002,
+      "observed": 1867,
+      "population": 59370479,
+      "rate_per_100k": 3.1447
+    },
+    {
+      "year": 2003,
+      "observed": 1887,
+      "population": 59647577,
+      "rate_per_100k": 3.1636
+    },
+    {
+      "year": 2004,
+      "observed": 1978,
+      "population": 59987905,
+      "rate_per_100k": 3.2973
+    },
+    {
+      "year": 2005,
+      "observed": 2049,
+      "population": 60401206,
+      "rate_per_100k": 3.3923
+    },
+    {
+      "year": 2006,
+      "observed": 2060,
+      "population": 60846820,
+      "rate_per_100k": 3.3856
+    },
+    {
+      "year": 2007,
+      "observed": 2177,
+      "population": 61322463,
+      "rate_per_100k": 3.5501
+    },
+    {
+      "year": 2008,
+      "observed": 2265,
+      "population": 61806995,
+      "rate_per_100k": 3.6646
+    },
+    {
+      "year": 2009,
+      "observed": 2336,
+      "population": 62276270,
+      "rate_per_100k": 3.751
+    },
+    {
+      "year": 2010,
+      "observed": 2360,
+      "population": 62766365,
+      "rate_per_100k": 3.76
+    },
+    {
+      "year": 2011,
+      "observed": 2312,
+      "population": 63258810,
+      "rate_per_100k": 3.6548
+    },
+    {
+      "year": 2012,
+      "observed": 2549,
+      "population": 63711000,
+      "rate_per_100k": 4.0009
+    },
+    {
+      "year": 2013,
+      "observed": 2560,
+      "population": 64138000,
+      "rate_per_100k": 3.9914
+    }
+  ],
+  "meta": {
+    "source": "UK Health and Safety Executive, MESO01 (published 2026-07-01)",
+    "raw": "data/raw/meso01.xlsx",
+    "processed": "data/processed/mesothelioma_gb.csv",
+    "note": "Seri paper (mean 14, var 34, rentang 3-30) tidak sama dengan seri HSE ini. Tidak ada angka Table II yang diklaim."
+  }
+}

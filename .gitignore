@@ -1,0 +1,32 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+renv/library/
+renv/staging/
+rsconnect/
+
+# PDF penelitian (berhak cipta) — hanya masuk image privat, tidak ke git
+private/paper/*.pdf
+
+# Data eksternal yang tidak dipakai aplikasi
+data/external/
+
+# Logs & cache
+*.log
+shiny-server/
+tests/testthat/_snaps/*.new
+www/vendor/pdfjs/*.map
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.playwright-mcp/
+.idea/
