@@ -24,7 +24,7 @@ Web lab under-reporting merekonstruksi Fernández-Fontelo dkk. (2016, INAR(1)-hi
 | 5 | PDF gate + viewer inline | ✅ |
 | 6 | Kualitas (test, CI, formatter) | ✅ |
 | 7 | Deploy EasyPanel | ✅ |
-| 8 | Hub portofolio & rilis | 🔄 |
+| 8 | Hub portofolio & rilis | ✅ |
 
 > Fase dikerjakan: tandai 🔄 saat mulai dan ✅ saat selesai, lalu jalankan `npm run hub:report` di tiap perubahan.
 
