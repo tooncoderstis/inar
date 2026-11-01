@@ -6,13 +6,17 @@ paper_gate_ui <- function(ns, lang) {
     bslib::card_body(
       div(class = "lock-icon", "\U0001F512"),
       h3(tr(lang, "Dokumen terkunci", "Locked document")),
-      p(tr(lang,
-           "Masukkan password untuk membaca paper. PDF ditampilkan inline dan tidak disediakan sebagai unduhan.",
-           "Enter the password to read the paper. The PDF is displayed inline and is not offered as a download.")),
+      p(tr(
+        lang,
+        "Masukkan password untuk membaca paper. PDF ditampilkan inline dan tidak disediakan sebagai unduhan.",
+        "Enter the password to read the paper. The PDF is displayed inline and is not offered as a download."
+      )),
       shiny::passwordInput(ns("password"), tr(lang, "Password", "Password"),
-                           placeholder = tr(lang, "Password akses", "Access password")),
+        placeholder = tr(lang, "Password akses", "Access password")
+      ),
       shiny::actionButton(ns("unlock"), tr(lang, "Buka dokumen", "Unlock document"),
-                          class = "btn-primary"),
+        class = "btn-primary"
+      ),
       shiny::uiOutput(ns("message"))
     )
   )
@@ -22,26 +26,43 @@ paper_reader_ui <- function(lang) {
   bslib::card(
     class = "paper-reader",
     bslib::card_header(
-      div(class = "pdf-toolbar",
-          tags$button(type = "button", class = "btn btn-sm btn-outline",
-                      onclick = "pdfPrev()", "\u2039"),
-          tags$span(id = "pdf-page", class = "pdf-page", "- / -"),
-          tags$button(type = "button", class = "btn btn-sm btn-outline",
-                      onclick = "pdfNext()", "\u203a"),
-          tags$button(type = "button", class = "btn btn-sm btn-outline",
-                      onclick = "pdfZoom(-0.2)", "\u2212"),
-          tags$button(type = "button", class = "btn btn-sm btn-outline",
-                      onclick = "pdfZoom(0.2)", "+")
+      div(
+        class = "pdf-toolbar",
+        tags$button(
+          type = "button", class = "btn btn-sm btn-outline",
+          onclick = "pdfPrev()", "\u2039"
+        ),
+        tags$span(id = "pdf-page", class = "pdf-page", "- / -"),
+        tags$button(
+          type = "button", class = "btn btn-sm btn-outline",
+          onclick = "pdfNext()", "\u203a"
+        ),
+        tags$button(
+          type = "button", class = "btn btn-sm btn-outline",
+          onclick = "pdfZoom(-0.2)", "\u2212"
+        ),
+        tags$button(
+          type = "button", class = "btn btn-sm btn-outline",
+          onclick = "pdfZoom(0.2)", "+"
+        )
       ),
-      div(class = "pdf-hint",
-          tr(lang, "Gunakan tombol untuk berpindah halaman atau memperbesar.",
-             "Use the buttons to change pages or zoom."))
+      div(
+        class = "pdf-hint",
+        tr(
+          lang, "Gunakan tombol untuk berpindah halaman atau memperbesar.",
+          "Use the buttons to change pages or zoom."
+        )
+      )
     ),
     bslib::card_body(
-      div(class = "pdf-stage",
-          tags$canvas(id = "pdf-canvas"),
-          div(id = "pdf-loading", class = "pdf-loading",
-              tr(lang, "Memuat dokumen...", "Loading document...")))
+      div(
+        class = "pdf-stage",
+        tags$canvas(id = "pdf-canvas"),
+        div(
+          id = "pdf-loading", class = "pdf-loading",
+          tr(lang, "Memuat dokumen...", "Loading document...")
+        )
+      )
     )
   )
 }
@@ -55,15 +76,21 @@ paper_ui <- function(id, lang) {
       class = "page-wrap",
       section_heading(
         tr(lang, "Paper penelitian", "Research paper"),
-        tr(lang,
-           "Fernandez-Fontelo, Cabana, Puig & Morina (2016), Statistics in Medicine 35:4875-4890.",
-           "Fernandez-Fontelo, Cabana, Puig & Morina (2016), Statistics in Medicine 35:4875-4890.")
+        tr(
+          lang,
+          "Fernandez-Fontelo, Cabana, Puig & Morina (2016), Statistics in Medicine 35:4875-4890.",
+          "Fernandez-Fontelo, Cabana, Puig & Morina (2016), Statistics in Medicine 35:4875-4890."
+        )
       ),
       shiny::uiOutput(ns("gate")),
-      p(class = "muted small",
-        tr(lang,
-           "Dokumen berhak cipta; hanya untuk penggunaan terbatas. Browser tetap dapat menyimpan salinan setelah ditampilkan.",
-           "Copyrighted document; limited use only. The browser may still save a copy once displayed."))
+      p(
+        class = "muted small",
+        tr(
+          lang,
+          "Dokumen berhak cipta; hanya untuk penggunaan terbatas. Browser tetap dapat menyimpan salinan setelah ditampilkan.",
+          "Copyrighted document; limited use only. The browser may still save a copy once displayed."
+        )
+      )
     )
   )
 }
@@ -107,10 +134,14 @@ paper_server <- function(id, lang, root = ".") {
 
     output$gate <- shiny::renderUI({
       if (!available) {
-        return(note_box(tr(lang(),
-                           "PDF tidak ditemukan di image ini. Hubungi administrator.",
-                           "The PDF is not present in this image. Contact the administrator."),
-                        "warn"))
+        return(note_box(
+          tr(
+            lang(),
+            "PDF tidak ditemukan di image ini. Hubungi administrator.",
+            "The PDF is not present in this image. Contact the administrator."
+          ),
+          "warn"
+        ))
       }
       if (isTRUE(unlocked())) paper_reader_ui(lang()) else paper_gate_ui(session$ns, lang())
     })
@@ -118,16 +149,20 @@ paper_server <- function(id, lang, root = ".") {
     shiny::observeEvent(input$unlock, {
       cfg <- paper_config()
       if (!cfg$configured) {
-        message_text(tr(lang(), "Password belum dikonfigurasi di server.",
-                        "The password is not configured on the server."))
+        message_text(tr(
+          lang(), "Password belum dikonfigurasi di server.",
+          "The password is not configured on the server."
+        ))
         return()
       }
       now <- Sys.time()
       old <- attempts()
       old <- old[difftime(now, old, units = "secs") < 300]
       if (length(old) >= 5) {
-        message_text(tr(lang(), "Terlalu banyak percobaan. Coba lagi dalam 5 menit.",
-                        "Too many attempts. Try again in 5 minutes."))
+        message_text(tr(
+          lang(), "Terlalu banyak percobaan. Coba lagi dalam 5 menit.",
+          "Too many attempts. Try again in 5 minutes."
+        ))
         attempts(old)
         return()
       }
@@ -159,7 +194,9 @@ paper_server <- function(id, lang, root = ".") {
 
     output$message <- shiny::renderUI({
       txt <- message_text()
-      if (!nzchar(txt)) return(NULL)
+      if (!nzchar(txt)) {
+        return(NULL)
+      }
       div(class = "form-error", txt)
     })
   })

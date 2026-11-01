@@ -1,5 +1,7 @@
 # INAR Under-reporting Lab
 
+**Live**: https://m-inar.hgteop.easypanel.host
+
 Web laboratorium untuk memahami **under-reporting** pada data hitungan kesehatan masyarakat dengan model **INAR(1)-hidden Markov chain**, berdasarkan:
 
 > Fernández-Fontelo, A., Cabaña, A., Puig, P., & Moriña, D. (2016). *Under-reported data analysis with INAR-hidden Markov chains*. **Statistics in Medicine**, 35(26), 4875–4890. DOI: [10.1002/sim.7026](https://doi.org/10.1002/sim.7026)

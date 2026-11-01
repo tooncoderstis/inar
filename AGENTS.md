@@ -36,5 +36,5 @@ npm run hub:report                       # lapor progres ke hub portofolio
 
 ## Deploy
 - EasyPanel project `m`, service `inar`, domain `m-inar.hgteop.easypanel.host`, port 3838.
-- Image privat; jangan build di server. Deploy via MCP EasyPanel.
-- Env wajib: `APP_VERSION`, `PORT=3838`, `PDF_PASSWORD_HASH`, `PDF_PASSWORD_SALT`.
+- Saat ini build dari Git (source `inar`) karena push registry timeout (ADR 0004). Deploy via MCP EasyPanel; jangan menaruh PDF mentah di repo.
+- Env wajib: `APP_VERSION`, `PORT=3838`, `PDF_PASSWORD_HASH`, `PDF_PASSWORD_SALT`, `PDF_ENC_KEY`.

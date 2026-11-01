@@ -77,8 +77,10 @@ ui <- bslib::page_fluid(
   tags$head(
     tags$meta(charset = "utf-8"),
     tags$meta(name = "viewport", content = "width=device-width, initial-scale=1"),
-    tags$meta(name = "description",
-              content = "Laboratorium under-reporting dengan model INAR(1)-hidden Markov chain."),
+    tags$meta(
+      name = "description",
+      content = "Laboratorium under-reporting dengan model INAR(1)-hidden Markov chain."
+    ),
     tags$link(rel = "stylesheet", href = "styles.css"),
     tags$link(rel = "icon", type = "image/svg+xml", href = "favicon.svg"),
     tags$script(HTML(

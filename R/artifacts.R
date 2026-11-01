@@ -2,8 +2,10 @@
 
 write_json <- function(x, path) {
   dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
-  jsonlite::write_json(x, path, auto_unbox = TRUE, pretty = TRUE, digits = NA,
-                       na = "null")
+  jsonlite::write_json(x, path,
+    auto_unbox = TRUE, pretty = TRUE, digits = NA,
+    na = "null"
+  )
 }
 
 acf_pacf <- function(x, lag.max = 40) {
@@ -128,4 +130,3 @@ meso_payload <- function(d, stats) {
     )
   )
 }
-

@@ -4,7 +4,7 @@ test_that("laporan verifikasi tidak memiliki FAIL", {
   expect_equal(report$summary$FAIL, 0)
   expect_true(nrow(report$entries) >= 30)
   expect_true(all(c("metric", "paper", "reproduced", "diff", "tolerance", "status") %in%
-                    names(report$entries)))
+    names(report$entries)))
 })
 
 test_that("angka kunci HPV berada dalam toleransi", {
@@ -12,7 +12,7 @@ test_that("angka kunci HPV berada dalam toleransi", {
   report <- jsonlite::read_json(project_file("verification", "report.json"), simplifyVector = TRUE)
   e <- report$entries
   row <- e[e$id == "hpv.mle.lambda", ]
-  expect_equal(row$status, "PASS_TOLERANCE")
+  expect_equal(row$status, "PASS")
   expect_lte(abs(row$diff), row$tolerance)
   expect_equal(e$status[e$id == "hpv.n"], "PASS")
 })

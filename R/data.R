@@ -3,8 +3,10 @@
 
 read_hpv <- function(root = ".") {
   path <- file.path(root, "data", "raw", "hpv_catalonia_weekly.csv")
-  d <- utils::read.csv(path, header = TRUE, sep = ";", check.names = FALSE,
-                       stringsAsFactors = FALSE)
+  d <- utils::read.csv(path,
+    header = TRUE, sep = ";", check.names = FALSE,
+    stringsAsFactors = FALSE
+  )
   d <- d[!is.na(d$Any) & !is.na(d$Setmana) & !is.na(d$Girona), ]
   d <- d[d$Any >= 2010 & d$Any <= 2014 & d$Setmana != 53, ]
   out <- data.frame(

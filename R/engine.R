@@ -84,12 +84,14 @@ inar_loglik <- function(par, y, th, lambda_vec = NULL, E = NULL, exposure = NULL
   omega <- par[3]
   q <- par[4]
   if (any(!is.finite(par)) || alpha <= 0 || alpha >= 1 || lambda <= 0 ||
-      omega <= 0 || omega >= 1 || q <= 0 || q >= 1) {
+    omega <= 0 || omega >= 1 || q <= 0 || q >= 1) {
     return(-Inf)
   }
   if (!is.null(exposure)) lambda_vec <- lambda * exposure
   if (is.null(lambda_vec)) lambda_vec <- rep(lambda, length(y))
-  if (max(y) > th) return(-Inf)
+  if (max(y) > th) {
+    return(-Inf)
+  }
   if (is.null(E)) E <- emission_matrix(th, omega, q, max(y))
   T_list <- transition_list(lambda_vec, th, alpha)
   forward_core(y, E, T_list, lambda_vec[1] / (1 - alpha))$loglik
@@ -105,7 +107,8 @@ fit_inar <- function(y, start, th, exposure = NULL, iterlim = 2000) {
     -ll
   }
   fit <- suppressWarnings(stats::nlm(
-    nll, p = start, hessian = TRUE, iterlim = iterlim,
+    nll,
+    p = start, hessian = TRUE, iterlim = iterlim,
     gradtol = 1e-8, steptol = 1e-8
   ))
   se <- rep(NA_real_, length(fit$estimate))
@@ -199,8 +202,10 @@ fit_mixture2 <- function(y, maxit = 100000, tol = 1e-10) {
     w <- nw
   }
   ll <- sum(log(w * stats::dpois(y, l1) + (1 - w) * stats::dpois(y, l2)))
-  list(lambda1 = l1, lambda2 = l2, weight1 = w, loglik = ll,
-       aic = -2 * ll + 2 * 3)
+  list(
+    lambda1 = l1, lambda2 = l2, weight1 = w, loglik = ll,
+    aic = -2 * ll + 2 * 3
+  )
 }
 
 #' Estimasi naive berbasis ACF (Section 3.1 paper).
@@ -225,8 +230,10 @@ naive_estimates <- function(y, mixture = fit_mixture2(y)) {
   lambda1 <- (1 - a1) * big
   a2 <- p2 / p1
   lambda2 <- (1 - a2) * big
-  list(alpha1 = a1, lambda1 = lambda1, alpha2 = a2, lambda2 = lambda2,
-       omega = omega, q = q, acf1 = p1, acf2 = p2)
+  list(
+    alpha1 = a1, lambda1 = lambda1, alpha2 = a2, lambda2 = lambda2,
+    omega = omega, q = q, acf1 = p1, acf2 = p2
+  )
 }
 
 #' AIC Poisson tunggal.

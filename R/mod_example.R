@@ -11,11 +11,15 @@ example_ui <- function(id, lang, d, kind) {
     tr(lang, "Botulism di Kanada, 1970-2013", "Botulism in Canada, 1970-2013")
   }
   sub <- if (is_hpv) {
-    tr(lang, "Deret mingguan yang stasioner: contoh paling sederhana dari metode INAR-HMM.",
-       "A stationary weekly series: the simplest illustration of the INAR-HMM method.")
+    tr(
+      lang, "Deret mingguan yang stasioner: contoh paling sederhana dari metode INAR-HMM.",
+      "A stationary weekly series: the simplest illustration of the INAR-HMM method."
+    )
   } else {
-    tr(lang, "Deret tahunan dengan kovariat populasi; counts diturunkan dari rate publik.",
-       "An annual series with a population covariate; counts derived from public rates.")
+    tr(
+      lang, "Deret tahunan dengan kovariat populasi; counts diturunkan dari rate publik.",
+      "An annual series with a population covariate; counts derived from public rates."
+    )
   }
 
   bslib::nav_panel(
@@ -26,35 +30,53 @@ example_ui <- function(id, lang, d, kind) {
       section_heading(title, sub),
       if (!is_hpv) {
         note_box(
-          tr(lang,
-             paste0("<strong>Status: perkiraan.</strong> File counts asli (bot.csv/popC.csv) tidak tersedia. ",
-                    "Counts di sini diturunkan dari rate per 100.000 dikali populasi, lalu 2010 dikoreksi menjadi 2 ",
-                    "mengikuti skrip paper. Estimasi MLE karenanya berstatus <em>ESTIMATED</em>, bukan PASS."),
-             paste0("<strong>Status: estimated.</strong> The original count files (bot.csv/popC.csv) are unavailable. ",
-                    "Counts are derived from rates per 100,000 times population, with 2010 corrected to 2 following ",
-                    "the paper's script. The MLE is therefore <em>ESTIMATED</em>, not PASS.")),
+          tr(
+            lang,
+            paste0(
+              "<strong>Status: perkiraan.</strong> File counts asli (bot.csv/popC.csv) tidak tersedia. ",
+              "Counts di sini diturunkan dari rate per 100.000 dikali populasi, lalu 2010 dikoreksi menjadi 2 ",
+              "mengikuti skrip paper. Estimasi MLE karenanya berstatus <em>ESTIMATED</em>, bukan PASS."
+            ),
+            paste0(
+              "<strong>Status: estimated.</strong> The original count files (bot.csv/popC.csv) are unavailable. ",
+              "Counts are derived from rates per 100,000 times population, with 2010 corrected to 2 following ",
+              "the paper's script. The MLE is therefore <em>ESTIMATED</em>, not PASS."
+            )
+          ),
           "warn"
         )
       },
       div(
         class = "kpi-grid",
-        kpi_card(st$n, tr(lang, "Observasi", "Observations"),
-                 if (is_hpv) tr(lang, "minggu", "weeks") else tr(lang, "tahun", "years")),
+        kpi_card(
+          st$n, tr(lang, "Observasi", "Observations"),
+          if (is_hpv) tr(lang, "minggu", "weeks") else tr(lang, "tahun", "years")
+        ),
         kpi_card(fmt_num(st$mean, 2), tr(lang, "Rata-rata tercatat", "Observed mean")),
-        kpi_card(fmt_num(f$mean_hidden, 2), tr(lang, "Rata-rata tersembunyi", "Hidden mean"),
-                 tr(lang, "estimasi model", "model estimate")),
-        kpi_card(fmt_pct(f$coverage_pct, 1), tr(lang, "Cakupan tercatat", "Reporting coverage"),
-                 tr(lang, "tercatat / tersembunyi", "observed / hidden"), "accent"),
-        kpi_card(fmt_num(f$omega, 3), tr(lang, "Frekuensi under-reporting", "Under-reporting frequency"),
-                 "omega"),
-        kpi_card(fmt_num(f$q, 3), tr(lang, "Intensitas under-reporting", "Under-reporting intensity"),
-                 "q")
+        kpi_card(
+          fmt_num(f$mean_hidden, 2), tr(lang, "Rata-rata tersembunyi", "Hidden mean"),
+          tr(lang, "estimasi model", "model estimate")
+        ),
+        kpi_card(
+          fmt_pct(f$coverage_pct, 1), tr(lang, "Cakupan tercatat", "Reporting coverage"),
+          tr(lang, "tercatat / tersembunyi", "observed / hidden"), "accent"
+        ),
+        kpi_card(
+          fmt_num(f$omega, 3), tr(lang, "Frekuensi under-reporting", "Under-reporting frequency"),
+          "omega"
+        ),
+        kpi_card(
+          fmt_num(f$q, 3), tr(lang, "Intensitas under-reporting", "Under-reporting intensity"),
+          "q"
+        )
       ),
       plot_card(
         tr(lang, "Proses tercatat vs tersembunyi", "Observed vs hidden process"),
         ns("series"),
-        tr(lang, "Garis gelap adalah rekonstruksi Viterbi dari deret tersembunyi.",
-           "The dark line is the Viterbi reconstruction of the hidden series.")
+        tr(
+          lang, "Garis gelap adalah rekonstruksi Viterbi dari deret tersembunyi.",
+          "The dark line is the Viterbi reconstruction of the hidden series."
+        )
       ),
       bslib::layout_columns(
         col_widths = c(7, 5),
@@ -69,26 +91,34 @@ example_ui <- function(id, lang, d, kind) {
               tagList(
                 p(HTML(tr(
                   lang,
-                  paste0("Model INAR(1) untuk proses tersembunyi adalah ",
-                         "<em>X<sub>n</sub> = ", fmt_num(f$alpha, 3), " o X<sub>n-1</sub> + W<sub>n</sub>(",
-                         fmt_num(f$lambda, 3), ")</em>. ",
-                         "Dengan probabilitas ", fmt_num(f$omega, 3), ", nilai yang tercatat adalah ",
-                         "hasil thinning dengan peluang ", fmt_num(f$q, 3), "; sisanya tercatat utuh."),
-                  paste0("The hidden INAR(1) process is <em>X<sub>n</sub> = ", fmt_num(f$alpha, 3),
-                         " o X<sub>n-1</sub> + W<sub>n</sub>(", fmt_num(f$lambda, 3), ")</em>. ",
-                         "With probability ", fmt_num(f$omega, 3), ", the recorded value is thinned with ",
-                         "probability ", fmt_num(f$q, 3), "; otherwise it is recorded exactly.")
+                  paste0(
+                    "Model INAR(1) untuk proses tersembunyi adalah ",
+                    "<em>X<sub>n</sub> = ", fmt_num(f$alpha, 3), " o X<sub>n-1</sub> + W<sub>n</sub>(",
+                    fmt_num(f$lambda, 3), ")</em>. ",
+                    "Dengan probabilitas ", fmt_num(f$omega, 3), ", nilai yang tercatat adalah ",
+                    "hasil thinning dengan peluang ", fmt_num(f$q, 3), "; sisanya tercatat utuh."
+                  ),
+                  paste0(
+                    "The hidden INAR(1) process is <em>X<sub>n</sub> = ", fmt_num(f$alpha, 3),
+                    " o X<sub>n-1</sub> + W<sub>n</sub>(", fmt_num(f$lambda, 3), ")</em>. ",
+                    "With probability ", fmt_num(f$omega, 3), ", the recorded value is thinned with ",
+                    "probability ", fmt_num(f$q, 3), "; otherwise it is recorded exactly."
+                  )
                 ))),
                 p(HTML(tr(
                   lang,
-                  paste0("Rata-rata tersembunyi yang diestimasi adalah <strong>",
-                         fmt_num(f$mean_hidden, 2), " kasus/minggu</strong>, sedangkan rata-rata tercatat hanya ",
-                         fmt_num(st$mean, 2), ". Artinya registry menangkap sekitar <strong>",
-                         fmt_pct(f$coverage_pct, 1), "</strong> dari total kasus yang diestimasi."),
-                  paste0("The estimated hidden mean is <strong>", fmt_num(f$mean_hidden, 2),
-                         " cases/week</strong>, while the recorded mean is only ", fmt_num(st$mean, 2),
-                         ". The registry therefore captures about <strong>", fmt_pct(f$coverage_pct, 1),
-                         "</strong> of the estimated total.")
+                  paste0(
+                    "Rata-rata tersembunyi yang diestimasi adalah <strong>",
+                    fmt_num(f$mean_hidden, 2), " kasus/minggu</strong>, sedangkan rata-rata tercatat hanya ",
+                    fmt_num(st$mean, 2), ". Artinya registry menangkap sekitar <strong>",
+                    fmt_pct(f$coverage_pct, 1), "</strong> dari total kasus yang diestimasi."
+                  ),
+                  paste0(
+                    "The estimated hidden mean is <strong>", fmt_num(f$mean_hidden, 2),
+                    " cases/week</strong>, while the recorded mean is only ", fmt_num(st$mean, 2),
+                    ". The registry therefore captures about <strong>", fmt_pct(f$coverage_pct, 1),
+                    "</strong> of the estimated total."
+                  )
                 ))),
                 p(class = "muted", tr(
                   lang,
@@ -100,21 +130,29 @@ example_ui <- function(id, lang, d, kind) {
               tagList(
                 p(HTML(tr(
                   lang,
-                  paste0("Model memakai kovariat populasi: lambda<sub>n</sub> = a x N<sub>n</sub> / 10<sup>7</sup>, ",
-                         "dengan a = ", fmt_num(f$a, 3), ". Frekuensi under-reporting omega = ",
-                         fmt_num(f$omega, 3), " dan intensitas q = ", fmt_num(f$q, 3), "."),
-                  paste0("The model uses a population covariate: lambda<sub>n</sub> = a x N<sub>n</sub> / 10<sup>7</sup>, ",
-                         "with a = ", fmt_num(f$a, 3), ". Under-reporting frequency omega = ",
-                         fmt_num(f$omega, 3), " and intensity q = ", fmt_num(f$q, 3), ".")
+                  paste0(
+                    "Model memakai kovariat populasi: lambda<sub>n</sub> = a x N<sub>n</sub> / 10<sup>7</sup>, ",
+                    "dengan a = ", fmt_num(f$a, 3), ". Frekuensi under-reporting omega = ",
+                    fmt_num(f$omega, 3), " dan intensitas q = ", fmt_num(f$q, 3), "."
+                  ),
+                  paste0(
+                    "The model uses a population covariate: lambda<sub>n</sub> = a x N<sub>n</sub> / 10<sup>7</sup>, ",
+                    "with a = ", fmt_num(f$a, 3), ". Under-reporting frequency omega = ",
+                    fmt_num(f$omega, 3), " and intensity q = ", fmt_num(f$q, 3), "."
+                  )
                 ))),
                 p(HTML(tr(
                   lang,
-                  paste0("Rata-rata tersembunyi sekitar <strong>", fmt_num(f$mean_hidden, 2),
-                         " kasus/tahun</strong>; registry menangkap sekitar <strong>",
-                         fmt_pct(f$coverage_pct, 1), "</strong>."),
-                  paste0("The hidden mean is about <strong>", fmt_num(f$mean_hidden, 2),
-                         " cases/year</strong>; the registry captures about <strong>",
-                         fmt_pct(f$coverage_pct, 1), "</strong>.")
+                  paste0(
+                    "Rata-rata tersembunyi sekitar <strong>", fmt_num(f$mean_hidden, 2),
+                    " kasus/tahun</strong>; registry menangkap sekitar <strong>",
+                    fmt_pct(f$coverage_pct, 1), "</strong>."
+                  ),
+                  paste0(
+                    "The hidden mean is about <strong>", fmt_num(f$mean_hidden, 2),
+                    " cases/year</strong>; the registry captures about <strong>",
+                    fmt_pct(f$coverage_pct, 1), "</strong>."
+                  )
                 ))),
                 p(class = "muted", tr(
                   lang,
@@ -134,15 +172,21 @@ example_ui <- function(id, lang, d, kind) {
       bslib::layout_columns(
         col_widths = c(6, 6),
         plot_card(tr(lang, "ACF mid-pseudo-residual", "ACF of mid-pseudo-residuals"),
-                  ns("acf_res"), height = "300px"),
+          ns("acf_res"),
+          height = "300px"
+        ),
         plot_card(tr(lang, "Distribusi residual", "Residual distribution"),
-                  ns("hist_res"), height = "300px")
+          ns("hist_res"),
+          height = "300px"
+        )
       ),
       plot_card(
         tr(lang, "Residual terhadap waktu", "Residuals over time"),
         ns("line_res"),
-        tr(lang, "Jika model memadai, residual menyerupai white noise dan berada di dalam pita.",
-           "If the model fits, residuals resemble white noise and stay within the band."),
+        tr(
+          lang, "Jika model memadai, residual menyerupai white noise dan berada di dalam pita.",
+          "If the model fits, residuals resemble white noise and stay within the band."
+        ),
         height = "300px"
       )
     )
@@ -161,9 +205,13 @@ example_server <- function(id, d, kind, lang, verification) {
       } else {
         plotly::plotly_empty() |>
           plotly::layout(
-            annotations = list(text = tr(lang(), "Tidak tersedia untuk seri non-stasioner",
-                                         "Not available for a non-stationary series"),
-                               showarrow = FALSE)
+            annotations = list(
+              text = tr(
+                lang(), "Tidak tersedia untuk seri non-stasioner",
+                "Not available for a non-stationary series"
+              ),
+              showarrow = FALSE
+            )
           )
       }
     })
@@ -173,9 +221,13 @@ example_server <- function(id, d, kind, lang, verification) {
       } else {
         plotly::plotly_empty() |>
           plotly::layout(
-            annotations = list(text = tr(lang(), "Lihat catatan metodologi",
-                                         "See the methodology note"),
-                               showarrow = FALSE)
+            annotations = list(
+              text = tr(
+                lang(), "Lihat catatan metodologi",
+                "See the methodology note"
+              ),
+              showarrow = FALSE
+            )
           )
       }
     })
@@ -193,22 +245,33 @@ example_server <- function(id, d, kind, lang, verification) {
     output$params <- DT::renderDT({
       f <- d$fit
       if (is_hpv) {
-        labels <- c(tr(lang(), "alpha (autoregresi)", "alpha (autoregression)"),
-                    tr(lang(), "lambda (inovasi)", "lambda (innovation)"),
-                    tr(lang(), "omega (frekuensi)", "omega (frequency)"),
-                    tr(lang(), "q (intensitas)", "q (intensity)"))
+        labels <- c(
+          tr(lang(), "alpha (autoregresi)", "alpha (autoregression)"),
+          tr(lang(), "lambda (inovasi)", "lambda (innovation)"),
+          tr(lang(), "omega (frekuensi)", "omega (frequency)"),
+          tr(lang(), "q (intensitas)", "q (intensity)")
+        )
         ids <- c("hpv.mle.alpha", "hpv.mle.lambda", "hpv.mle.omega", "hpv.mle.q")
         est <- c(f$alpha, f$lambda, f$omega, f$q)
         se <- c(f$se$alpha, f$se$lambda, f$se$omega, f$se$q)
       } else {
-        labels <- c(tr(lang(), "alpha (autoregresi)", "alpha (autoregression)"),
-                    "a (kovariat populasi)", "a (population covariate)",
-                    tr(lang(), "omega (frekuensi)", "omega (frequency)"),
-                    tr(lang(), "q (intensitas)", "q (intensity)"))
-        if (identical(lang(), "en")) labels <- c("alpha (autoregression)", "a (population covariate)",
-                                                  "omega (frequency)", "q (intensity)")
-        else labels <- c("alpha (autoregresi)", "a (kovariat populasi)",
-                         "omega (frekuensi)", "q (intensitas)")
+        labels <- c(
+          tr(lang(), "alpha (autoregresi)", "alpha (autoregression)"),
+          "a (kovariat populasi)", "a (population covariate)",
+          tr(lang(), "omega (frekuensi)", "omega (frequency)"),
+          tr(lang(), "q (intensitas)", "q (intensity)")
+        )
+        if (identical(lang(), "en")) {
+          labels <- c(
+            "alpha (autoregression)", "a (population covariate)",
+            "omega (frequency)", "q (intensity)"
+          )
+        } else {
+          labels <- c(
+            "alpha (autoregresi)", "a (kovariat populasi)",
+            "omega (frekuensi)", "q (intensitas)"
+          )
+        }
         ids <- c("bot.mle.alpha", "bot.mle.a", "bot.mle.omega", "bot.mle.q")
         est <- c(f$alpha, f$a, f$omega, f$q)
         se <- c(f$se$alpha, f$se$a, f$se$omega, f$se$q)
@@ -225,7 +288,8 @@ example_server <- function(id, d, kind, lang, verification) {
       tab$Reconstructed <- round(tab$Reconstructed, 3)
       tab$SE <- round(tab$SE, 3)
       DT::datatable(
-        tab, rownames = FALSE, escape = FALSE,
+        tab,
+        rownames = FALSE, escape = FALSE,
         options = list(dom = "t", pageLength = 10, ordering = FALSE)
       ) |>
         DT::formatRound(columns = c("Paper", "Reconstructed", "SE"), digits = 3) |>

@@ -1,7 +1,9 @@
 # Memuat .env untuk pengembangan lokal. Di produksi, env disuntikkan oleh platform.
 
 load_dotenv <- function(path = ".env") {
-  if (!file.exists(path)) return(invisible(FALSE))
+  if (!file.exists(path)) {
+    return(invisible(FALSE))
+  }
   lines <- readLines(path, warn = FALSE, encoding = "UTF-8")
   for (line in lines) {
     line <- trimws(line)

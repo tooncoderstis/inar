@@ -50,7 +50,9 @@ plot_card <- function(title, plot, sub = NULL, height = "420px") {
 }
 
 fmt_num <- function(x, digits = 3) {
-  if (is.null(x) || length(x) == 0 || is.na(x)) return("-")
+  if (is.null(x) || length(x) == 0 || is.na(x)) {
+    return("-")
+  }
   formatC(as.numeric(x), digits = digits, format = "f")
 }
 
@@ -61,13 +63,17 @@ fmt_pct <- function(x, digits = 1) {
 paper_value <- function(id, data) {
   e <- data$verification$entries
   row <- e[e$id == id, , drop = FALSE]
-  if (nrow(row) == 0) return(NA)
+  if (nrow(row) == 0) {
+    return(NA)
+  }
   row$paper[1]
 }
 
 verification_status <- function(id, data) {
   e <- data$verification$entries
   row <- e[e$id == id, , drop = FALSE]
-  if (nrow(row) == 0) return(NA_character_)
+  if (nrow(row) == 0) {
+    return(NA_character_)
+  }
   row$status[1]
 }

@@ -24,3 +24,4 @@
 - Positif: tidak ada byte PDF sebelum autentikasi; pengalaman baca konsisten.
 - Negatif: browser masih bisa menyimpan PDF setelah ditampilkan (batas teknis); password lemah.
 - Tindak lanjut: rotasi password; pertimbangkan watermark; pantau percobaan gagal.
+- Catatan implementasi: karena registry push gagal, image dibangun dari Git dan PDF disimpan terenkripsi; lihat ADR 0004.

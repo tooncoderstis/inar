@@ -10,9 +10,11 @@ verification_ui <- function(id, lang, data) {
       class = "page-wrap",
       section_heading(
         tr(lang, "Verifikasi angka paper", "Verification of paper numbers"),
-        tr(lang,
-           "Setiap angka dibandingkan dengan hasil rekonstruksi. Status dihitung otomatis oleh pipeline R.",
-           "Each number is compared with the reconstruction. Status is computed automatically by the R pipeline.")
+        tr(
+          lang,
+          "Setiap angka dibandingkan dengan hasil rekonstruksi. Status dihitung otomatis oleh pipeline R.",
+          "Each number is compared with the reconstruction. Status is computed automatically by the R pipeline."
+        )
       ),
       div(
         class = "kpi-grid",
@@ -44,19 +46,27 @@ verification_ui <- function(id, lang, data) {
         bslib::card(
           bslib::card_header(tr(lang, "Catatan optimizer", "Optimizer note")),
           bslib::card_body(
-            p(tr(lang,
-                 paste0("MLE HPV direkonstruksi dengan nlm dan fungsi likelihood yang sama seperti kode suplemen. ",
-                        "Dengan orientasi matriks transisi yang benar (kolom = state berikutnya), nlm mencapai ",
-                        "titik optimum yang sama dengan paper pada 3 desimal untuk alpha, lambda, omega, q, dan SE."),
-                 paste0("HPV MLE is reconstructed with nlm and the same likelihood as the supplementary code. ",
-                        "With the corrected transition-matrix orientation (columns = next state), nlm reaches ",
-                        "the same optimum as the paper at three decimals for alpha, lambda, omega, q, and SE."))),
+            p(tr(
+              lang,
+              paste0(
+                "MLE HPV direkonstruksi dengan nlm dan fungsi likelihood yang sama seperti kode suplemen. ",
+                "Dengan orientasi matriks transisi yang benar (kolom = state berikutnya), nlm mencapai ",
+                "titik optimum yang sama dengan paper pada 3 desimal untuk alpha, lambda, omega, q, dan SE."
+              ),
+              paste0(
+                "HPV MLE is reconstructed with nlm and the same likelihood as the supplementary code. ",
+                "With the corrected transition-matrix orientation (columns = next state), nlm reaches ",
+                "the same optimum as the paper at three decimals for alpha, lambda, omega, q, and SE."
+              )
+            )),
             div(
               class = "download-row",
               shiny::downloadButton(ns("download_json"), tr(lang, "Unduh JSON", "Download JSON"),
-                                    class = "btn-outline"),
+                class = "btn-outline"
+              ),
               shiny::downloadButton(ns("download_csv"), tr(lang, "Unduh CSV", "Download CSV"),
-                                    class = "btn-outline")
+                class = "btn-outline"
+              )
             )
           )
         )
@@ -74,7 +84,9 @@ verification_server <- function(id, data, lang) {
         if (is.character(x) && grepl("^-?[0-9.]+([eE][-+]?[0-9]+)?$", x)) {
           x <- suppressWarnings(as.numeric(x))
         }
-        if (is.numeric(x)) return(formatC(x, digits = 5, format = "fg"))
+        if (is.numeric(x)) {
+          return(formatC(x, digits = 5, format = "fg"))
+        }
         as.character(x)
       }
       labels_en <- c(
@@ -126,7 +138,8 @@ verification_server <- function(id, data, lang) {
         stringsAsFactors = FALSE
       )
       DT::datatable(
-        tab, rownames = FALSE, escape = FALSE,
+        tab,
+        rownames = FALSE, escape = FALSE,
         options = list(pageLength = 15, dom = "tp", order = list(list(0, "asc")))
       ) |>
         DT::formatStyle(

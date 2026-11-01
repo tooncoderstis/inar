@@ -1,6 +1,6 @@
 # Laporan verifikasi
 
-Digenerate: 2026-11-01T15:09:41+0700
+Digenerate: 2026-11-01T23:11:47+0700
 
 Paper: Fernandez-Fontelo A., Cabana A., Puig P., Morina D. - Statistics in Medicine 35(26):4875-4890 (2016)
 

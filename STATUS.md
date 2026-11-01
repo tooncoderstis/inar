@@ -5,52 +5,56 @@
 > **Jangan simpan kredensial di file ini.**
 
 - **Terakhir diperbarui**: 2026-11-01
-- **Versi produksi aktif**: belum dirilis
+- **Versi produksi aktif**: 0.1.0
 - **Platform**: R Shiny (bslib + plotly + DT) · Docker · EasyPanel `m/inar`
+- **URL**: https://m-inar.hgteop.easypanel.host
+- **Repo**: https://github.com/tooncoderstis/inar
 
 ## TL;DR (konteks 30 detik)
-Web laboratorium under-reporting yang merekonstruksi Fernández-Fontelo dkk. (2016, INAR(1)-hidden Markov chain) dari kode R suplemen + data publik. HPV terverifikasi (statistik/naive eksak; MLE dalam 2,5%), Botulism terverifikasi deskriptif (MLE masih perkiraan), mesothelioma ekstensi berlabel. Aplikasi bilingual ID/EN dengan lab parameter dan PDF inline berpassword.
+Web lab under-reporting merekonstruksi Fernández-Fontelo dkk. (2016, INAR(1)-hidden Markov chain). HPV kini **PASS eksak** (statistik, naive, MLE, SE) setelah orientasi matriks transisi diperbaiki. Botulism PASS deskriptif; MLE ESTIMATED karena counts diturunkan dari rate. Mesothelioma ekstensi berlabel N/A. Aplikasi bilingual ID/EN dengan lab parameter dan PDF inline berpassword (tersimpan terenkripsi).
 
 ## Checklist Tahap
 | Tahap | Judul | Status |
 |---|---|---|
-| 0 | Setup & Fondasi | 🔄 |
-| 1 | Dokumentasi & ADR | 🔄 |
-| 2 | Data & provenance | ⬜ |
-| 3 | Pipeline R + verifikasi | ⬜ |
-| 4 | Web (dashboard, metodologi, lab) | ⬜ |
-| 5 | PDF gate + viewer inline | ⬜ |
-| 6 | Kualitas (test, CI, formatter) | ⬜ |
-| 7 | Deploy EasyPanel | ⬜ |
-| 8 | Hub portofolio & rilis | ⬜ |
+| 0 | Setup & Fondasi | ✅ |
+| 1 | Dokumentasi & ADR | ✅ |
+| 2 | Data & provenance | ✅ |
+| 3 | Pipeline R + verifikasi | ✅ |
+| 4 | Web (dashboard, metodologi, lab) | ✅ |
+| 5 | PDF gate + viewer inline | ✅ |
+| 6 | Kualitas (test, CI, formatter) | ✅ |
+| 7 | Deploy EasyPanel | ✅ |
+| 8 | Hub portofolio & rilis | 🔄 |
 
-> Fase dikerjakan: tandai 🔄 saat mulai dan ✅ saat selesai, lalu jalankan `npm run hub:report` di tiap perubahan — hub portofolio mengirim notifikasi (inbox + Web Push).
+> Fase dikerjakan: tandai 🔄 saat mulai dan ✅ saat selesai, lalu jalankan `npm run hub:report` di tiap perubahan.
 
 ## Kondisi saat ini
-- Data mentah dipindahkan ke `data/raw/`; PDF ke `private/paper/` (tidak di `www/`).
-- R 4.5.3 tersedia; `shiny`, `bslib`, `plotly`, `DT`, `readxl`, `digest`, `testthat`, `styler`, `lintr` terpasang.
-- Uji awal: HPV 260 obs, mean 1,2692, var 1,6029, ACF(1) 0,1338; EM 2-Poisson 1,0426/2,7658/ω=0,8685.
-- MLE HPV rekonstruksi 0,520/1,647/0,926/0,320 vs paper 0,517/1,623/0,922/0,326 (likelihood rekonstruksi lebih tinggi).
-- Botulism: counts turunan dari rate×populasi; MLE 0,566/2,630/0,714/0,333 belum sama dengan paper.
+- Live di `https://m-inar.hgteop.easypanel.host` (HTTP 200, PDF 16 halaman, terverifikasi Playwright 375/768/1440).
+- `Rscript scripts/run_analysis.R`: **17 PASS, 13 PASS_TOLERANCE, 5 ESTIMATED, 4 N/A, 0 FAIL**.
+- `Rscript tests/testthat.R`: 28 test lulus; `lintr` bersih; `styler` diterapkan.
+- HPV: n=260, mean 1,2692, var 1,6029, ACF(1) 0,1338; MLE α=0,5167, λ=1,6232, ω=0,9220, q=0,3256; coverage 37,8%.
+- Botulism: n=44, mean 8,84, var 44,97; MLE α=0,5488, a=2,7671, ω=0,7011, q=0,3258 (ESTIMATED).
+- Mesothelioma: seri HSE tidak sama dengan seri paper; tidak diklaim.
+- Deploy memakai build Git (ADR 0004) karena push registry timeout; PDF hanya ada sebagai `paper.enc` dengan kunci di env.
 
 ## Yang belum selesai / menunggu
 | Item | Catatan |
 |---|---|
-| `bot.csv` & `popC.csv` asli | dicari di suplemen publisher; jika tidak ada, status MLE = WARN |
-| PDF.js assets | di-vendor saat build |
-| Docker daemon | Docker Desktop belum berjalan saat scaffold |
-| Kredensial registry privat | dipasang saat deploy |
+| Image privat di registry | push Docker Hub timeout; GHCR token tanpa `write:packages`. Pindahkan saat jaringan/kredensial membaik. |
+| `bot.csv` & `popC.csv` asli | jika ditemukan, ubah Botulism MLE dari ESTIMATED ke verifikasi penuh. |
+| Rotasi password PDF | `12334567` sudah terekspos di chat; rotasi via runbook operate. |
+| Foto/screenshot UI | belum diambil untuk dokumentasi. |
 
 ## Cara menjalankan & menguji
 ```sh
-Rscript scripts/run_analysis.R      # pipeline + verifikasi
-Rscript -e "shiny::runApp('.', port=3838)"  # aplikasi
+Rscript scripts/run_analysis.R      # pipeline + verifikasi (~4 menit)
+Rscript scripts/run_app.R           # aplikasi di :3838
 Rscript tests/testthat.R            # unit + golden test
 npm run hub:report                  # lapor progres
 ```
 
 ## Rilis
-`docker build -t aasatech/inar:<versi> .` → push ke registry privat → deploy EasyPanel `m/inar`. Detail: [`docs/runbooks/deploy.md`](docs/runbooks/deploy.md).
+`git push origin main` → EasyPanel build dari Git (source `inar`). Detail: [`docs/runbooks/deploy.md`](docs/runbooks/deploy.md).
 
 ## Referensi cepat
 - PRD: `PRD.md` · Changelog: `CHANGELOG.md` · ADR: `docs/adr/README.md` · Runbook: `docs/runbooks/`

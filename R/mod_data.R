@@ -9,37 +9,48 @@ data_ui <- function(id, lang) {
       class = "page-wrap",
       section_heading(
         tr(lang, "Data dan provenance", "Data and provenance"),
-        tr(lang,
-           "Data mentah tidak diubah. Semua transformasi tercatat dan dapat diunduh.",
-           "Raw data are unchanged. Every transformation is documented and downloadable.")
+        tr(
+          lang,
+          "Data mentah tidak diubah. Semua transformasi tercatat dan dapat diunduh.",
+          "Raw data are unchanged. Every transformation is documented and downloadable."
+        )
       ),
       bslib::navset_card_tab(
         bslib::nav_panel(
           "HPV Girona",
           DT::DTOutput(ns("hpv_table")),
-          div(class = "download-row",
-              shiny::downloadButton(ns("hpv_csv"), "CSV", class = "btn-outline"))
+          div(
+            class = "download-row",
+            shiny::downloadButton(ns("hpv_csv"), "CSV", class = "btn-outline")
+          )
         ),
         bslib::nav_panel(
           "Botulism",
           DT::DTOutput(ns("bot_table")),
-          div(class = "download-row",
-              shiny::downloadButton(ns("bot_csv"), "CSV", class = "btn-outline"))
+          div(
+            class = "download-row",
+            shiny::downloadButton(ns("bot_csv"), "CSV", class = "btn-outline")
+          )
         ),
         bslib::nav_panel(
           "Mesothelioma",
           DT::DTOutput(ns("meso_table")),
-          div(class = "download-row",
-              shiny::downloadButton(ns("meso_csv"), "CSV", class = "btn-outline"))
+          div(
+            class = "download-row",
+            shiny::downloadButton(ns("meso_csv"), "CSV", class = "btn-outline")
+          )
         ),
         bslib::nav_panel(
           tr(lang, "Provenance", "Provenance"),
-          div(class = "prose",
-              HTML(shiny::markdown(paste(
-                readLines(file.path("data", "processed", "PROVENANCE.md"),
-                          warn = FALSE, encoding = "UTF-8"),
-                collapse = "\n"
-              ))))
+          div(
+            class = "prose",
+            HTML(shiny::markdown(paste(
+              readLines(file.path("data", "processed", "PROVENANCE.md"),
+                warn = FALSE, encoding = "UTF-8"
+              ),
+              collapse = "\n"
+            )))
+          )
         )
       )
     )

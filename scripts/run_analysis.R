@@ -178,12 +178,18 @@ write_json(
 # ---------------------------------------------------------------------------
 message("== Ringkasan ==")
 cat("HPV : n=", n_hpv, " mean=", round(stats_hpv$mean, 4),
-    " var=", round(stats_hpv$var, 4),
-    " ACF1=", round(stats_hpv$acf1, 4), "\n", sep = "")
+  " var=", round(stats_hpv$var, 4),
+  " ACF1=", round(stats_hpv$acf1, 4), "\n",
+  sep = ""
+)
 cat("HPV MLE: ", paste(round(fit_hpv$estimate, 4), collapse = ", "),
-    " | coverage ", round(coverage_hpv, 1), "%\n", sep = "")
+  " | coverage ", round(coverage_hpv, 1), "%\n",
+  sep = ""
+)
 cat("BOT MLE: ", paste(round(fit_bot$estimate, 4), collapse = ", "),
-    " | AIC ", round(bot_fit$aic, 2), "\n", sep = "")
+  " | AIC ", round(bot_fit$aic, 2), "\n",
+  sep = ""
+)
 cat("Status: ", paste(names(report$summary), report$summary, sep = "=", collapse = ", "), "\n", sep = "")
 cat("Selesai dalam ", round(as.numeric(difftime(Sys.time(), t_start, units = "mins")), 1), " menit\n", sep = "")
 
